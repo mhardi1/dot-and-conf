@@ -17,6 +17,8 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
+-- modul tambahan
+local lain = require("lain")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -44,16 +46,23 @@ end
 -- }}}
 
 -- {{{ Variable definitions
+
+local themes = {
+    "mytheme"   -- 1
+}
+local chosen_theme = "mytheme"
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("/home/administrator/.config/awesome/themes/mytheme/theme.lua")
+beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme))
 
 -- This is used later as the default terminal and editor to run.
-terminal  = "st"
-editor    = os.getenv("EDITOR") or "nano"
+local terminal  = "st"
+local editor    = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Pengaturan aplikasi lainnya
-
+local netbrowser   = "min"
+local filebrowser   = "dolphin"
+local codebrowser   = "krusader"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -238,7 +247,16 @@ root.buttons(gears.table.join(
 -- {{{ Key bindings
 globalkeys = gears.table.join(
     -- Aturan tombol cepat tambahan
-    awful.key({ altkey }, "-", function () awful.util.spawn("scrot -e 'mv $f ~/Gambar/screenshot/ 2>/dev/null'", false) end),
+    awful.key({ altkey }, "-", function () awful.util.spawn("scrot -e 'mv $f ~/Gambar/screenshot/ 2>/dev/null'", false) end,
+        {description = "take a screenshot", group = "hotkeys"}),
+    awful.key({ altkey }, "[", function () awful.util.spawn("amixer -q -D pulse sset Master 5%+", false) end,
+        {description = "volume up", group = "hotkeys"}),
+    awful.key({ altkey }, "]", function () awful.util.spawn("amixer -q -D pulse sset Master 5%-", false) end,
+        {description = "volume down", group = "hotkeys"}),
+    awful.key({ altkey }, "o", function () os.execute("xbacklight -inc 10") end,
+              {description = "brightness +10%", group = "hotkeys"}),
+    awful.key({ altkey }, "p", function () os.execute("xbacklight -dec 10") end,
+              {description = "brightness -10%", group = "hotkeys"}),
     -- Lihat daftar tombol cepat
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
@@ -294,6 +312,13 @@ globalkeys = gears.table.join(
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
+    -- Buka program lainnya
+    awful.key({ modkey,           }, "q", function () awful.spawn(netbrowser) end,
+              {description = "open a netbrowser", group = "launcher"}),
+    awful.key({ modkey,           }, "d", function () awful.spawn(filebrowser) end,
+              {description = "open a filebrowser", group = "launcher"}),
+    awful.key({ modkey,           }, "c", function () awful.spawn(codebrowser) end,
+              {description = "open a codebrowser", group = "launcher"}),
     -- Mengatur layout
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
