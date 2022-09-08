@@ -60,9 +60,10 @@ local editor    = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Pengaturan aplikasi lainnya
-local netbrowser   = "min"
-local filebrowser   = "dolphin"
-local codebrowser   = "krusader"
+local netbrowser = "min"
+local filebrowser = "dolphin"
+local codebrowser = "krusader"
+local sysmonitor = "conky"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -319,6 +320,8 @@ globalkeys = gears.table.join(
               {description = "open a filebrowser", group = "launcher"}),
     awful.key({ modkey,           }, "c", function () awful.spawn(codebrowser) end,
               {description = "open a codebrowser", group = "launcher"}),
+    awful.key({ modkey,           }, "y", function () awful.spawn(sysmonitor) end,
+              {description = "open a sysmonitor", group = "launcher"}),
     -- Mengatur layout
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
