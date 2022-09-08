@@ -1,2 +1,5 @@
 # myconfigs
-Personal configurations files
+Berkas-berkas konfigurasi pribadi
+
+## awesomewm
+rc.lua
