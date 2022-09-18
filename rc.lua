@@ -47,11 +47,11 @@ end
 
 -- {{{ Definisi-definisi variabel
 
+-- Tema digunakan untuk mendefinisikan warna, ikon, font dan wallpaper.
 local themes = {
     "mytheme"   -- 1
 }
 local chosen_theme = "mytheme"
--- Tema digunakan untuk mendefinisikan warna, ikon, font dan wallpaper.
 beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme))
 
 -- Pengaturan terminal dan editor default.
@@ -109,8 +109,6 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                     { "open terminal", terminal }
                                   }
                         })
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
 
 -- Konfigurasi menubar
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -183,7 +181,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Tiap layar memiliki daftar tag-nya sendiri.
-    awful.tag({ "term", "code", "web", "gimp", "fun", "office", "7", "8", "9" }, s, awful.layout.layouts[1])
+    awful.tag({ "term", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
 
     -- Buat promptbox untuk tiap layar
     s.mypromptbox = awful.widget.prompt()
@@ -221,7 +219,6 @@ awful.screen.connect_for_each_screen(function(s)
         layout = wibox.layout.align.horizontal,
         { -- Widget di kiri
             layout = wibox.layout.fixed.horizontal,
-            mylauncher,
             s.mytaglist,
             s.mypromptbox,
         },
