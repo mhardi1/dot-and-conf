@@ -46,7 +46,6 @@ end
 -- }}}
 
 -- {{{ Definisi-definisi variabel
-
 -- Tema digunakan untuk mendefinisikan warna, ikon, font dan wallpaper.
 local themes = {
     "mytheme"   -- 1
@@ -56,14 +55,14 @@ beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv
 
 -- Pengaturan terminal dan editor default.
 local terminal  = "st"
-local editor    = os.getenv("EDITOR") or "nano"
-editor_cmd = terminal .. " -e " .. editor
-
+local editor    = "kwrite"
 -- Pengaturan aplikasi lainnya
 local netbrowser = "min"
 local filebrowser = "dolphin"
-local codebrowser = "krusader"
 local sysmonitor = "conky"
+local codeeditor = "kate"
+local musicplayer = "lxmusic"
+local videostreaming = "electronplayer"
 
 -- Pengaturan modkey.
 -- Biasanya, Mod4 adalah tombol dengan sebuah logo di antara Control and Alt.
@@ -100,7 +99,7 @@ awful.layout.layouts = {
 myawesomemenu = {
    { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
    { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
+   { "edit config", editor .. " " .. awesome.conffile },
    { "restart", awesome.restart },
    { "quit", function() awesome.quit() end },
 }
@@ -280,6 +279,7 @@ globalkeys = gears.table.join(
         {description = "focus previous by index", group = "client"}
     ),
     awful.key({ modkey,           }, "w", function ()
+    
     -- Lihat menu utama
     mymainmenu:show() end,
               {description = "show main menu", group = "awesome"}),
@@ -316,10 +316,15 @@ globalkeys = gears.table.join(
               {description = "open a netbrowser", group = "launcher"}),
     awful.key({ modkey,           }, "d", function () awful.spawn(filebrowser) end,
               {description = "open a filebrowser", group = "launcher"}),
-    awful.key({ modkey,           }, "c", function () awful.spawn(codebrowser) end,
-              {description = "open a codebrowser", group = "launcher"}),
+    awful.key({ modkey,           }, "c", function () awful.spawn(codeeditor) end,
+              {description = "open a codeeditor", group = "launcher"}),
     awful.key({ modkey,           }, "y", function () awful.spawn(sysmonitor) end,
               {description = "open a sysmonitor", group = "launcher"}),
+    awful.key({ modkey,           }, "v", function () awful.spawn(videostreaming) end,
+              {description = "open a videostreaming", group = "launcher"}),
+    awful.key({ modkey,           }, "t", function () awful.spawn(musicplayer) end,
+              {description = "open a musicplayer", group = "launcher"}),
+              
     -- Mengatur layout
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
@@ -337,6 +342,7 @@ globalkeys = gears.table.join(
               {description = "select next", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
               {description = "select previous", group = "layout"}),
+              
     -- Minimize client
     awful.key({ modkey, "Control" }, "n",
               function ()
