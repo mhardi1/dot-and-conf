@@ -1,8 +1,8 @@
 # myconfigs
 Berkas-berkas konfigurasi pribadi
 
-## awesomewm
+### awesomewm
 rc.lua
 
-## conky
+### conky
 conky.conf
