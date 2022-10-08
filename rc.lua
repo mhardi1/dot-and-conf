@@ -456,6 +456,7 @@ awful.rules.rules = {
           "MessageWin",  -- kalarm.
           "Sxiv",
           "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
+          "Conky",
           "Wpa_gui",
           "veromix",
           "xtightvncviewer"},
