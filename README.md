@@ -1,5 +1,5 @@
 # myconfigs
-Berkas-berkas konfigurasi pribadi
+Berkas-berkas konfigurasi dan dot pribadi
 
 ### awesomewm
 rc.lua
