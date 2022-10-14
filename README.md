@@ -6,3 +6,6 @@ rc.lua
 
 ### conky
 conky.conf
+
+### Xresources
+.Xdefaults
